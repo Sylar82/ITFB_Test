@@ -90,21 +90,13 @@ public class BookingTicketsTest
         driver.findElement(By.xpath("//tbody/tr/td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
         Assert.assertTrue(true);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
+    @Test
+    public void SelectFlight()
+    {
+
+    }
 
 
 }

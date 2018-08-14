@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class AuthorizationTest {
+public class BookingTicketsTest {
 
     private static WebDriver driver;
 

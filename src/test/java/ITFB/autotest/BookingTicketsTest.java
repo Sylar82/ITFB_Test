@@ -33,10 +33,10 @@ public class BookingTicketsTest
     public void UserLogin()
     {
 
-        WebElement loginField = driver.findElement(By.xpath("//tr[2]/td[2]/input"));        // Поиск поля логина
+        WebElement loginField = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/form/table/tbody/tr[4]/td/table/tbody/tr[2]/td[2]/input"));        // Поиск поля логина
         loginField.sendKeys("test1");                                        // Ввод логина в поле
 
-        WebElement passwordField = driver.findElement(By.xpath("//tr[3]/td[2]/input"));    // поиск поля пароля
+        WebElement passwordField = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/form/table/tbody/tr[4]/td/table/tbody/tr[3]/td[2]/input"));    // поиск поля пароля
         passwordField.sendKeys("test1");
 
         WebElement loginButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/input"));  // Поиск кнопки login
@@ -95,6 +95,29 @@ public class BookingTicketsTest
     @Test
     public void SelectFlight()
     {
+        driver.findElement(By.xpath("//tbody/tr[2]/td[2]/b/font")).isDisplayed();
+
+        Assert.assertTrue("11/20/2018", true);
+        Assert.assertTrue("Paris to Seattle",true);
+
+        WebElement outFlight = driver.findElement(By.xpath("//td/form/table[1]/tbody/tr[9]/td[1]/input"));
+        outFlight.click();
+
+
+        Assert.assertTrue("Seattle to Paris", true);
+        Assert.assertTrue("12/19/2015", true);
+
+        WebElement inFlight = driver.findElement(By.xpath("//td/form/table[2]/tbody/tr[5]/td[1]/input"));
+        inFlight.click();
+
+        WebElement reserveFlights = driver.findElement(By.xpath("//td/form/p/input"));
+        reserveFlights.click();
+
+        String returnPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[3]/td[3]/font")).getText();
+        System.out.println("return price = " + returnPrice);
+
+        String departPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[3]/font")).getText();
+        System.out.println("depart price = " + departPrice);
 
     }
 

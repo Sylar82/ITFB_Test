@@ -2,7 +2,9 @@ package ITFB.autotest;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,14 +13,23 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
+import static ITFB.autotest.Variables.*;
+
+@FixMethodOrder(MethodSorters.JVM)
+
 public class BookingTicketsTest
 {
 
     private static WebDriver driver;
 
+
+
     @BeforeClass
+
+
     public static void setup()
     {
+
 
         System.setProperty("webdriver.chrome.driver", "/Volumes/HDD/Development/chromedriver");
         driver = new ChromeDriver();
@@ -26,24 +37,24 @@ public class BookingTicketsTest
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://newtours.demoaut.com/");
 
-
     }
+
 
     @Test
     public void UserLogin()
     {
 
-        WebElement loginField = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/form/table/tbody/tr[4]/td/table/tbody/tr[2]/td[2]/input"));        // Поиск поля логина
-        loginField.sendKeys("test1");                                        // Ввод логина в поле
+        WebElement loginField = driver.findElement(By.xpath("//tbody/tr[2]/td[2]/input"));
+        loginField.sendKeys("test1");
 
-        WebElement passwordField = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/form/table/tbody/tr[4]/td/table/tbody/tr[3]/td[2]/input"));    // поиск поля пароля
+        WebElement passwordField = driver.findElement(By.xpath("//tbody/tr[3]/td[2]/input"));
         passwordField.sendKeys("test1");
 
-        WebElement loginButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/input"));  // Поиск кнопки login
-        loginButton.click();                                                               // и нажатие на нее
+        WebElement loginButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/input"));
+        loginButton.click();
 
-        driver.findElement(By.xpath("//td[2]/table/tbody/tr[1]/td/img")).isDisplayed();    // проверка, что авторизация
-        Assert.assertTrue(true);                                                  // прошла успешно
+        driver.findElement(By.xpath("//td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
+        Assert.assertTrue(true);
 
 
 
@@ -81,7 +92,7 @@ public class BookingTicketsTest
         WebElement servClass = driver.findElement(By.xpath("//tbody/tr[9]/td[2]/font/font/input[1]"));
         servClass.click();
 
-        Select airline = new Select(driver.findElement(By.xpath("//tbody/tr[5]/td/form/table/tbody/tr[10]/td[2]/select")));
+        Select airline = new Select(driver.findElement(By.xpath("//tbody/tr[10]/td[2]/select")));
         airline.selectByVisibleText("Pangea Airlines");
 
         WebElement ContinueButton = driver.findElement(By.xpath("//tbody/tr[14]/td/input"));
@@ -113,13 +124,57 @@ public class BookingTicketsTest
         WebElement reserveFlights = driver.findElement(By.xpath("//td/form/p/input"));
         reserveFlights.click();
 
-        String returnPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[3]/td[3]/font")).getText();
-        System.out.println("return price = " + returnPrice);
+        departPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[3]/td[3]/font")).getText();
 
-        String departPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[3]/font")).getText();
-        System.out.println("depart price = " + departPrice);
+        returnPrice = driver.findElement(By.xpath("//td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[3]/font")).getText();
 
     }
+
+    @Test
+    public void BookAFlight()
+    {
+        driver.findElement(By.xpath("//td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
+        Assert.assertTrue(true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[1]/td[1]/b/font"));
+        Assert.assertTrue("Paris to Seattle",true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/b/font"));
+        Assert.assertTrue("11/20/2018", true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[3]/td[1]/font/b"));
+        Assert.assertTrue("Unified Airlines 363", true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/font"));
+        Assert.assertTrue("Business", true);
+
+        summaryDepartPrice = driver.findElement(By.cssSelector("body > div > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(4) > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(5) > td > form > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(3) > td.data_center > font")).getText();
+        Assert.assertEquals("281", summaryDepartPrice);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[4]/td[1]/b/font"));
+        Assert.assertTrue("Seattle to Paris", true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[1]/font/font/font[1]/b"));
+        Assert.assertTrue("Blue Skies Airlines 631", true);
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[2]/font"));
+        Assert.assertTrue("Business", true);
+
+        summaryReturnPrice = driver.findElement (By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[6]/td[3]/font")).getText();
+        Assert.assertEquals("273", summaryReturnPrice);
+
+        passengersCount = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[7]/td[2]/font")).getText();
+        Assert.assertTrue("2", true);
+
+        taxesPrice = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[8]/td[2]/font")).getText();
+        Assert.assertTrue("$91", true);
+
+        summaryTotalPrice = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td/table/tbody/tr[9]/td[2]/font/b")).getText();
+        Assert.assertTrue("$1199", true);
+
+    }
+
+
 
 
 }

@@ -114,7 +114,7 @@ public class BookingTicketsTest
 
 
         Assert.assertTrue("Seattle to Paris", true);
-        Assert.assertTrue("12/19/2015", true);
+        Assert.assertTrue("12/19/2018", true);
 
         WebElement inFlight = driver.findElement(By.xpath("//td/form/table[2]/tbody/tr[5]/td[1]/input"));
         inFlight.click();
@@ -129,13 +129,12 @@ public class BookingTicketsTest
     }
 
     @Test
-    public void BookAFlight()
-    {
+    public void BookAFlight() {
         driver.findElement(By.xpath("//td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
         Assert.assertTrue(true);
 
         driver.findElement(By.xpath("//table/tbody/tr[1]/td[1]/b/font"));
-        Assert.assertTrue("Paris to Seattle",true);
+        Assert.assertTrue("Paris to Seattle", true);
 
         driver.findElement(By.xpath("//table/tbody/tr[1]/td[2]/b/font"));
         Assert.assertTrue("11/20/2018", true);
@@ -158,7 +157,7 @@ public class BookingTicketsTest
         driver.findElement(By.xpath("//table/tbody/tr[6]/td[2]/font"));
         Assert.assertTrue("Business", true);
 
-        summaryReturnPrice = driver.findElement (By.xpath("//table/tbody/tr[6]/td[3]/font")).getText();
+        summaryReturnPrice = driver.findElement(By.xpath("//table/tbody/tr[6]/td[3]/font")).getText();
         Assert.assertEquals("273", summaryReturnPrice);
 
         passengersCount = driver.findElement(By.xpath("//table/tbody/tr[7]/td[2]/font")).getText();
@@ -167,22 +166,121 @@ public class BookingTicketsTest
         taxesPrice = driver.findElement(By.xpath("//table/tbody/tr[8]/td[2]/font")).getText();
         Assert.assertTrue("$91", true);
 
-        String departPrice = Variables.departPrice.substring(8);
+        departPrice = Variables.departPrice.substring(8);
         int departPriceInt = Integer.parseInt(String.valueOf(departPrice));
 
-        String returnPrice = Variables.returnPrice.substring(8);
+        returnPrice = Variables.returnPrice.substring(8);
         int returnPriceInt = Integer.parseInt(String.valueOf(returnPrice));
 
         int passengersCountInt = Integer.parseInt(passengersCount);
 
-        String taxesPrice = Variables.taxesPrice.substring(1);
+        taxesPrice = Variables.taxesPrice.substring(1);
         int taxesPriceInt = Integer.parseInt(String.valueOf(taxesPrice));
-        int TotalpriceInt = passengersCountInt*(departPriceInt + returnPriceInt) + taxesPriceInt;
+        int TotalpriceInt = passengersCountInt * (departPriceInt + returnPriceInt) + taxesPriceInt;
 
         totalPrice = s + Integer.toString(TotalpriceInt);
 
         summaryTotalPrice = driver.findElement(By.xpath("//table/tbody/tr[9]/td[2]/font/b")).getText();
         Assert.assertEquals(totalPrice, summaryTotalPrice);
+
+        passFirst0 = driver.findElement(By.xpath("//tbody/tr[4]/td/table/tbody/tr[2]/td[1]/input"));
+        passFirst0.sendKeys("Ivanov");
+
+        passLast0 = driver.findElement(By.xpath("//tbody/tr[4]/td/table/tbody/tr[2]/td[2]/input"));
+        passLast0.sendKeys("Ivan");
+
+        pass0meal = new Select(driver.findElement(By.xpath("//tbody/tr[4]/td/table/tbody/tr[2]/td[3]/select")));
+        pass0meal.selectByValue("HNML");
+
+        passFirst1 = driver.findElement(By.xpath("//tbody/tr[5]/td/table/tbody/tr[2]/td[1]/input"));
+        passFirst1.sendKeys("Ivanova");
+
+        passLast1 = driver.findElement(By.xpath("//tbody/tr[5]/td/table/tbody/tr[2]/td[2]/input"));
+        passLast1.sendKeys("Irina");
+
+        pass1meal = new Select(driver.findElement(By.xpath("//tbody/tr[5]/td/table/tbody/tr[2]/td[3]/select")));
+        pass1meal.selectByValue("BLML");
+
+        creditCard = new Select(driver.findElement(By.xpath("//tbody/tr[7]/td/table/tbody/tr[2]/td[1]/select")));
+        creditCard.selectByValue("BA");
+
+        creditNumber = driver.findElement(By.xpath("//tbody/tr[7]/td/table/tbody/tr[2]/td[2]/input"));
+        creditNumber.sendKeys("5479540454132487");
+
+        cc_exp_dt_mn = new Select(driver.findElement(By.xpath("//tbody/tr[7]/td/table/tbody/tr[2]/td[3]/select[1]")));
+        cc_exp_dt_mn.selectByVisibleText("05");
+
+        cc_exp_dt_yr = new Select(driver.findElement(By.xpath("//tbody/tr[7]/td/table/tbody/tr[2]/td[3]/select[2]")));
+        cc_exp_dt_yr.selectByVisibleText("2009");
+
+        cc_frst_name = driver.findElement(By.xpath("//tbody/tr[8]/td/table/tbody/tr[2]/td[1]/input"));
+        cc_frst_name.sendKeys("Ivan");
+
+        cc_mid_name = driver.findElement(By.xpath("//tbody/tr[8]/td/table/tbody/tr[2]/td[2]/input"));
+        cc_mid_name.sendKeys("Ivanovich");
+
+        cc_last_name = driver.findElement(By.xpath("//tbody/tr[8]/td/table/tbody/tr[2]/td[3]/input"));
+        cc_last_name.sendKeys("Ivanov");
+
+        driver.findElement(By.xpath("//tbody/tr[10]/td[2]/input")).clear();
+
+        billAddress1 = driver.findElement(By.xpath("//tbody/tr[10]/td[2]/input"));
+        billAddress1.sendKeys("1085 Borregas Ave.");
+
+        driver.findElement(By.xpath("//tbody/tr[12]/td[2]/input")).clear();
+
+        billCity = driver.findElement(By.xpath("//tbody/tr[12]/td[2]/input"));
+        billCity.sendKeys("Albuquerque");
+
+        driver.findElement(By.xpath("//tbody/tr[13]/td[2]/input[1]")).clear();
+
+        billState = driver.findElement(By.xpath("//tbody/tr[13]/td[2]/input[1]"));
+        billState.sendKeys("New Mexico");
+
+        driver.findElement(By.xpath("//tbody/tr[13]/td[2]/input[2]")).clear();
+
+        billZip = driver.findElement(By.xpath("//tbody/tr[13]/td[2]/input[2]"));
+        billZip.sendKeys("94089");
+
+        billCountry = new Select(driver.findElement(By.xpath("//tbody/tr[14]/td[2]/select")));
+        billCountry.selectByVisibleText("UNITED STATES");
+
+        ticketLess = driver.findElement(By.xpath("//tbody/tr[15]/td[2]/input"));
+        ticketLess.click();
+
+        driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[16]/td[2]/input")).clear();
+
+        delAddress1 = driver.findElement(By.xpath("/html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[16]/td[2]/input"));
+        delAddress1.sendKeys("1225 Borregas Ave.");
+
+        driver.findElement(By.xpath("//tbody/tr[18]/td[2]/input")).clear();
+
+        delCity = driver.findElement(By.xpath("//tbody/tr[18]/td[2]/input"));
+        delCity.sendKeys("Boston");
+
+        driver.findElement(By.xpath("//tbody/tr[19]/td[2]/input[1]")).clear();
+
+        delState = driver.findElement(By.xpath("//tbody/tr[19]/td[2]/input[1]"));
+        delState.sendKeys("Massachusetts");
+
+        driver.findElement(By.xpath("//tbody/tr[19]/td[2]/input[2]")).clear();
+
+        delZip = driver.findElement(By.xpath("//tbody/tr[19]/td[2]/input[2]"));
+        delZip.sendKeys("91089");
+
+        delCountry = new Select(driver.findElement(By.xpath("//tbody/tr[20]/td[2]/select")));
+        delCountry.selectByVisibleText("UNITED STATES");
+
+        buyFlights = driver.findElement(By.xpath("//tbody/tr[24]/td/input"));
+        buyFlights.click();
+    }
+
+    @Test
+    public void FlightConfirmation()
+    {
+        driver.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr[1]/td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
+
+        
 
     }
 

@@ -2,18 +2,16 @@ package ITFB.autotest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import static ITFB.autotest.Setup.driver;
+public class UserLogin extends BookingTicketsTest
+{
 
-public class UserLogin {
-
-
-        public void BookingTicketsTest() {
-
+    public  UserLogin() {
 
 
-
-            WebElement loginField = driver.findElement(By.xpath("//tbody/tr[2]/td[2]/input"));
+        ChromeDriver driver = new ChromeDriver();
+        WebElement loginField = driver.findElement(By.xpath("//tbody/tr[2]/td[2]/input"));
             loginField.sendKeys("test1");
 
             WebElement passwordField = driver.findElement(By.xpath("//tbody/tr[3]/td[2]/input"));

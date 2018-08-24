@@ -3,23 +3,27 @@ package ITFB.autotest;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import static ITFB.autotest.Setup.driver;
-import static ITFB.autotest.Variables.*;
+import static ITFB.autotest.SelectFlight.*;
+import static ITFB.autotest.BookingTicket.*;
 
-class SummaryAsserts {
 
-    public void SummaryAssert()
+
+public class SummaryAssertsTest extends BookingTicketsTest {
+
+    private ChromeDriver driver;
+
+    public SummaryAssertsTest()
 
     {
+        driver = new ChromeDriver();
 
-        driver.findElement(By.xpath("//tbody/tr[4]/td/table/tbody/tr[1]/td[2]/table/tbody/tr[1]/td/img")).
-
-                isDisplayed();
+        driver.findElement(By.xpath("//tbody/tr[4]/td/table/tbody/tr[1]/td[2]/table/tbody/tr[1]/td/img")).isDisplayed();
 
         String departingConfirmation = driver.findElement(By.xpath("//tr[1]/td[2]/table/tbody/tr[5]/td/table/tbody/tr[3]/td/font")).getText();
 
-        String departingConfirmationAssert = (summaryDepart + "\n" + departDate + " @ 11:24 w/ "
+        String departingConfirmationAssert = (summaryDepart+ "\n" + departDate + " @ 11:24 w/ "
                 + summaryDepartFlight + "\n" + flightClass + "\n" + s + summaryDepartPrice + " each");
         Assert.assertEquals(departingConfirmation, departingConfirmationAssert);
 

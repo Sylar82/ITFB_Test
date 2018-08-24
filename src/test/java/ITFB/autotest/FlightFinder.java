@@ -2,13 +2,15 @@ package ITFB.autotest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import static ITFB.autotest.Setup.driver;
 
-public class FlightFinder {
+public class FlightFinder extends BookingTicketsTest
+{
 
-    public void FlightDetails()
+
+    public FlightFinder(ChromeDriver driver)
 
     {
 

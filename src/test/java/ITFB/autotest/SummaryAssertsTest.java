@@ -1,14 +1,14 @@
 package ITFB.autotest;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static ITFB.autotest.Setup.driver;
+import static ITFB.autotest.Variables.*;
 
-public class SummaryAssertsTest {
-    @Test
+class SummaryAsserts {
+
     public void SummaryAssert()
 
     {

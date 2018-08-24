@@ -1,7 +1,6 @@
 package ITFB.autotest;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -9,7 +8,7 @@ import static ITFB.autotest.Setup.driver;
 
 //  Выбор авиарейсов
         public class SelectFlightTest {
-            @Test
+
             public void SelectFlight()
 
             {

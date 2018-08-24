@@ -1,6 +1,5 @@
 package ITFB.autotest;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -8,7 +7,7 @@ import static ITFB.autotest.Setup.driver;
 
 public class UserLogin {
 
-        @Test
+
         public void BookingTicketsTest() {
 
 
